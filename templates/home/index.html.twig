@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+
+
+	<h1>home</h1>
+	<div class="post-form">
+		{{include('post/new.html.twig')}}
+	</div>
+	<div class="thread">
+
+		{% for post in posts %}
+            <p>{{post.author.name}}</p>
+			<p>{{ post.content }}</p>
+			<p>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+
+		{% else %}
+			<tr>
+				<td colspan="4">no records found</td>
+			</tr>
+		{% endfor %}
+
+	</div>
+{% endblock %}
