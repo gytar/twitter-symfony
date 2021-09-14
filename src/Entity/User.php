@@ -27,6 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $email;
 
+
     /**
      * @ORM\Column(type="json")
      */
@@ -52,6 +53,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author", orphanRemoval=true)
      */
     private $hisPosts;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     public function __construct()
     {
@@ -235,6 +241,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $hisPost->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
