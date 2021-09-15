@@ -15,7 +15,7 @@ class PostType extends AbstractType
         $builder
             ->add('content', TextareaType::class, [
                 'attr' => [
-                    'placeholder' => 'Qu\'est-ce qui vous inspire?',
+                    'placeholder' => 'Quoi de neuf ?',
                     'class' => 'form-control',
                 ]
             ])

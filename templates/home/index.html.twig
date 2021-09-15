@@ -4,23 +4,67 @@
 
 {% block body %}
 	<div class="d-flex justify-content-center">
-		<div class="d-flex flex-column w-25">
-			<h1>Home.</h1>
-			<div class="post-form my-4">
-				{{include('post/new.html.twig')}}
-
+		<div class="d-flex flex-column w-40">
+			<h1>Accueil</h1>
+			<div class="row">
+				<div class="col-2" style="margin-top: 25px">
+					<img src="http://www.doigtdecole.com/wp-content/uploads/2020/03/logo-rond-twitter.png" alt="" width="50px" height="50px">
+				</div>
+				<div class="col-10">
+					<div class="post-form my-4">
+						{{include('post/new.html.twig')}}
+					</div>
+				</div>
 			</div>
+
 			<br>
 			<div class="thread">
 
 				{% for post in posts %}
-					<div class="row">
-					<p class="col-6">{{post.author.username}}</p>
-					<p class="col-6">{{post.createdAt|date}}</p>
+					<div class="tweet" style="border: 1px solid whitesmoke; padding: 20px">
+						<div class="row">
+							<div class="col-2">
+								<img src="http://www.doigtdecole.com/wp-content/uploads/2020/03/logo-rond-twitter.png" alt="" width="50px" height="50px">
+							</div>
+							<div class="col-10">
+								<div class="row">
+									<div class="col-10">
+										<p class="col-10"><span style="font-weight: bold">{{post.author.firstname}} {{post.author.lastname}} </span><span style="color: darkgrey">@{{post.author.username}}</span> . {{post.createdAt|date}}</p>
+									</div>
+									<div class="col-2">
+										<p>...</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<p>{{ post.content }}</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="row" style="margin-top: 20px">
+							<div class="col-3 d-flex justify-content-center align-items-center">
+								<button style="background-color: transparent; color: white; border: none;">
+									<i class="far fa-comment"></i><span style="margin-left: 5px">{{post.comments |length}}</span>
+								</button>
+							</div>
+							<div class="col-3 d-flex justify-content-center align-items-center">
+								<button style="background-color: transparent; color: white; border: none;">
+									<i class="fas fa-retweet"></i><span style="margin-left: 5px">83</span>								</button>
+							</div>
+							<div class="col-3 d-flex justify-content-center align-items-center">
+								<button style="background-color: transparent; color: white; border: none;">
+									<i class="far fa-heart"></i><span style="margin-left: 5px">{{post.likes |length}}</span>
+								</button>
+							</div>
+							<div class="col-3 d-flex justify-content-center align-items-center">
+								<button style="background-color: transparent; color: white; border: none;">
+									<i class="fas fa-share-square"></i>
+								</button>
+							</div>
+						</div>
 					</div>
-					
-					<p>{{ post.content }}</p>
-					<p>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</p>
 				{% else %}
 					
 						<p>Aucun Gazouilli de trouvé 😢</p>
