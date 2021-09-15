@@ -33,7 +33,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'post' => $post,
             'postform' => $postForm->createView(),
-            'posts' => $postRepo->findAll(),
+            'posts' => $postRepo->getAllOrderByDate(),
+
             'controller_name' => 'HomeController',
         ]);
     }

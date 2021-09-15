@@ -4,7 +4,7 @@
 
 {% block body %}
 	<div class="d-flex justify-content-center">
-		<div class="d-flex flex-column w-40">
+		<div class="d-flex flex-column w-60">
 			<h1>Accueil</h1>
 			<div class="row">
 				<div class="col-2" style="margin-top: 25px">
@@ -29,7 +29,7 @@
 							<div class="col-10">
 								<div class="row">
 									<div class="col-10">
-										<p class="col-10"><span style="font-weight: bold">{{post.author.firstname}} {{post.author.lastname}} </span><span style="color: darkgrey">@{{post.author.username}}</span> . {{post.createdAt|date}}</p>
+										<p class="col-10"><span style="font-weight: bold">{{post.author.firstname}} {{post.author.lastname}} </span><span style="color: darkgrey">@{{post.author.username}}</span> . {{post.createdAt|dateToLetter}}</p>
 									</div>
 									<div class="col-2">
 										<p>...</p>
