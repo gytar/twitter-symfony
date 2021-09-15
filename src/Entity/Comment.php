@@ -29,6 +29,12 @@ class Comment
      */
     private $likes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -77,6 +83,18 @@ class Comment
                 $like->setComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

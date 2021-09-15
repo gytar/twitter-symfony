@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %}Home | Gazouillis{% endblock %}
 
 {% block body %}
 	<div class="d-flex justify-content-center">
@@ -15,12 +14,16 @@
 			<div class="thread">
 
 				{% for post in posts %}
-					<p>{{post.author.name}}</p>
+					<div class="row">
+					<p class="col-6">{{post.author.name}}</p>
+					<p class="col-6">{{post.createdAt|date}}</p>
+					</div>
+					
 					<p>{{ post.content }}</p>
 					<p>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</p>
 				{% else %}
 					
-						<p>Aucun Tweet de trouvé 😢</p>
+						<p>Aucun Gazouilli de trouvé 😢</p>
 				{% endfor %}
 
 			</div>
