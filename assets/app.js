@@ -6,8 +6,18 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.sass';
-import 'bootstrap'
+import "./styles/app.sass";
+import "bootstrap";
 
 // start the Stimulus application
-import './bootstrap';
+import "./bootstrap";
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const entryInfoElements = document.querySelector('[data-entry-info]');
+    console.log(entryInfoElements.dataset.entryInfo);
+    const entryInfoObjects =  Array.from(entryInfoElements).map(
+        item => JSON.parse(item.dataset.entryInfo)
+    )
+    console.log(entryInfoObjects);
+})
