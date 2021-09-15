@@ -35,6 +35,11 @@ class Comment
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $content;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -95,6 +100,18 @@ class Comment
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

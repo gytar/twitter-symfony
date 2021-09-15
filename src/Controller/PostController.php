@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,5 +91,19 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('post_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/comments", name="post_show_comments")
+     */
+    public function showComments(string $id, PostRepository $repository)
+    {
+        $post = $repository->find(intval($id));
+        $comments = $post->getComments();
+
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+            'comments' => $comments
+        ]);
     }
 }
