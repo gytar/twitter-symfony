@@ -15,6 +15,10 @@ import "./bootstrap";
 document.addEventListener("DOMContentLoaded", () => {
   const itemsElements = document.querySelector("[data-items]");
   let data = JSON.parse(itemsElements.getAttribute("data-items")); 
+  console.log('====================================');
+  console.log(data);
+  console.log('====================================');
+
   let likeBtns = document.querySelectorAll(".btn-likes")
 
   for (let i = 0; i < likeBtns.length; i++) {
