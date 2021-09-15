@@ -3,76 +3,148 @@
 {% block title %}Home | Gazouillis{% endblock %}
 
 {% block body %}
-	<div class="d-flex justify-content-center">
-		<div class="d-flex flex-column w-60">
-			<h1>Accueil</h1>
-			<div class="row">
-				<div class="col-2" style="margin-top: 25px">
-					<img src="http://www.doigtdecole.com/wp-content/uploads/2020/03/logo-rond-twitter.png" alt="" width="50px" height="50px">
+	<style>
+		.btn-comments:hover {
+			color: #1c90de !important;
+		}
+		.btn-retweets:hover {
+			color: #04aa73 !important;
+		}
+		.btn-likes:hover {
+			color: #e31c7a !important;
+		}
+		.btn-share:hover {
+			color: #1c90de !important;
+		}
+		.tweet:hover {
+			transition-duration: 500ms;
+			background-color: #253341 !important;
+			cursor: pointer;
+		}
+		.row > .col-12 > i {
+			font-size: 25px;
+			margin-bottom: 30px;
+		}
+		.row > .col-12 > i:hover {
+			background-color: #253341;
+			border-radius: 50%;
+			padding: 15px;
+			cursor: pointer;
+		}
+	</style>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2" style="margin-top: 10px; margin-right: 30px">
+				<div class="row">
+					<div class="col-12 d-flex justify-content-end">
+						<i class="fab fa-twitter"></i>
+					</div>
 				</div>
-				<div class="col-10">
-					<div class="post-form my-4">
-						{{include('post/new.html.twig')}}
+				<div class="row">
+					<div class="col-12 d-flex justify-content-end">
+						<i class="fas fa-home"></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 d-flex justify-content-end">
+						<i class="fas fa-hashtag"></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 d-flex justify-content-end">
+						<i class="far fa-bell"></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 d-flex justify-content-end">
+						<i class="far fa-envelope"></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 d-flex justify-content-end">
+						<i class="far fa-user"></i>
 					</div>
 				</div>
 			</div>
-
-			<br>
-			<div class="thread">
-
-				{% for post in posts %}
-					<div class="tweet" style="border: 1px solid whitesmoke; padding: 20px">
-						<div class="row">
-							<div class="col-2">
+			<div class="col-6">
+				<div class="" style="border: 1px solid rgb(56, 68, 77);">
+					<div class="d-flex flex-column">
+						<h1 style="font-size: 20px; font-weight: bold; padding: 10px">Accueil</h1>
+						<div class="row" style="border: 1px solid rgb(56, 68, 77); padding: 0 -15px">
+							<div class="col-2" style="margin-top: 25px">
 								<img src="http://www.doigtdecole.com/wp-content/uploads/2020/03/logo-rond-twitter.png" alt="" width="50px" height="50px">
 							</div>
 							<div class="col-10">
-								<div class="row">
-									<div class="col-10">
-										<p class="col-10"><span style="font-weight: bold">{{post.author.firstname}} {{post.author.lastname}} </span><span style="color: darkgrey">@{{post.author.username}}</span> . {{post.createdAt|dateToLetter}}</p>
-									</div>
-									<div class="col-2">
-										<p>...</p>
-									</div>
+								<div class="post-form my-4">
+									{{include('post/new.html.twig')}}
 								</div>
-								<div class="row">
-									<div class="col-12">
-										<p>{{ post.content }}</p>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<div class="row" style="margin-top: 20px">
-							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="far fa-comment"></i><span style="margin-left: 5px">{{post.comments |length}}</span>
-								</button>
-							</div>
-							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="fas fa-retweet"></i><span style="margin-left: 5px">83</span>								</button>
-							</div>
-							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="far fa-heart"></i><span style="margin-left: 5px">{{post.likes |length}}</span>
-								</button>
-							</div>
-							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="fas fa-share-square"></i>
-								</button>
 							</div>
 						</div>
 					</div>
-				{% else %}
-					
-						<p>Aucun Gazouilli de trouvé 😢</p>
-				{% endfor %}
+				</div>
 
+				<div class="">
+					<div class="d-flex flex-column">
+						{% for post in posts %}
+							<div class="tweet" style="border: 1px solid rgb(56, 68, 77); padding: 20px">
+								<div class="row">
+									<div class="col-2">
+										<img src="http://www.doigtdecole.com/wp-content/uploads/2020/03/logo-rond-twitter.png" alt="" width="50px" height="50px">
+									</div>
+									<div class="col-10">
+										<div class="row">
+											<div class="col-10">
+												<p class="col-10"><span style="font-weight: bold; font-size: 16px;">{{post.author.firstname}} {{post.author.lastname}} </span><span style="color: rgb(136, 153, 166)">@{{post.author.username}} · {{post.createdAt|dateToLetter}}</span></p>
+											</div>
+											<div class="col-2">
+												<button style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
+													<p style="font-size: 20px; font-weight: bold">...</p>
+												</button>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<p>{{ post.content }}</p>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="row" style="margin-top: 20px">
+									<div class="col-3 d-flex justify-content-center align-items-center">
+										<button class="btn-comments" style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
+											<i class="far fa-comment"></i><span style="margin-left: 5px">{{post.comments |length}}</span>
+										</button>
+									</div>
+									<div class="col-3 d-flex justify-content-center align-items-center">
+										<button class="btn-retweets" style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
+											<i class="fas fa-retweet"></i><span style="margin-left: 5px">83</span>								</button>
+									</div>
+									<div class="col-3 d-flex justify-content-center align-items-center">
+										<button class="btn-likes" style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
+											<i class="far fa-heart"></i><span style="margin-left: 5px">{{post.likes |length}}</span>
+										</button>
+									</div>
+									<div class="col-3 d-flex justify-content-center align-items-center">
+										<button class="btn-share" style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
+											<i class="fas fa-share-square"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						{% else %}
+
+							<p>Aucun Gazouilli de trouvé 😢</p>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
+			<div class="col-4"></div>
 		</div>
 	</div>
 
 
 {% endblock %}
+
+
