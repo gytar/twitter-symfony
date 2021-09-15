@@ -8,14 +8,33 @@ use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
-
-    public function dateToLetters(\DateTime $date) {
+    public function dateToLetter(\DateTime $date)
+    {
         $now = new \DateTime();
-        if ($date->diff($now) > 60) {
-            return $date->format('H:i:s, YY-mm-dd');
+        $interval = $date->diff($now);
+
+        if (
+            $this->dateIntervalYearMonthAndDay($interval) &&
+            $interval->h === 0 &&
+            $interval->i === 0
+        ) {
+            return $interval->s . 's ago';
+        } elseif (
+            $this->dateIntervalYearMonthAndDay($interval) &&
+            $interval->h === 0
+        ) {
+            return $interval->i . 'min ago';
+        } elseif ($this->dateIntervalYearMonthAndDay($interval)) {
+            // dd($date->format('h\h'));
+            return $interval->h . 'h ago';
         } else {
-            return $date->format('s\s');
+            return $date->format('d/M/y');
         }
+    }
+
+    private function dateIntervalYearMonthAndDay(\DateInterval $interval): bool
+    {
+        return $interval->y === 0 && $interval->m === 0 && $interval->d === 0;
     }
 
     public function getFilters(): array
@@ -24,15 +43,13 @@ class AppExtension extends AbstractExtension
             // If your filter generates SAFE HTML, you should add a third
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
-            new TwigFilter('filter_name', [$this, 'doSomething']),
+            new TwigFilter('dateToLetter', [$this, 'dateToLetter']),
         ];
     }
 
     public function getFunctions(): array
     {
-        return [
-            new TwigFunction('function_name', [$this, 'doSomething']),
-        ];
+        return [new TwigFunction('function_name', [$this, 'doSomething'])];
     }
 
     public function doSomething($value)
