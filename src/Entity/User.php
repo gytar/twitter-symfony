@@ -92,9 +92,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setUsername(string $username): self
     {
+<<<<<<< HEAD
         $this->username = $username;
 
         return $this;
+=======
+         $this->username = $username;
+
+         return $this;
+>>>>>>> c2f8694c0e1762a235d12cb289b07290ffd9094f
     }
 
     public function getEmail(): ?string
