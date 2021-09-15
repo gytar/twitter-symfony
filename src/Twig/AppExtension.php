@@ -8,6 +8,7 @@ use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
+  
     public function dateToLetter(\DateTime $date)
     {
         $now = new \DateTime();
@@ -18,15 +19,15 @@ class AppExtension extends AbstractExtension
             $interval->h === 0 &&
             $interval->i === 0
         ) {
-            return $interval->s . 's ago';
+            return $interval->s . 's';
         } elseif (
             $this->dateIntervalYearMonthAndDay($interval) &&
             $interval->h === 0
         ) {
-            return $interval->i . 'min ago';
+            return $interval->i . 'min';
         } elseif ($this->dateIntervalYearMonthAndDay($interval)) {
             // dd($date->format('h\h'));
-            return $interval->h . 'h ago';
+            return $interval->h . 'h';
         } else {
             return $date->format('d/M/y');
         }
