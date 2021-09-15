@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -26,6 +28,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $username;
+
+    private $email;
+
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -49,9 +59,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $birthAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="likedBy")
      */
-    private $email;
+    private $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author", orphanRemoval=true)
+     */
+    private $posts;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author", orphanRemoval=true)
+     */
+    private $hisPosts;
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->hisPosts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +96,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
@@ -134,7 +171,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+    }
 
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getLikedBy() === $this) {
+                $like->setLikedBy(null);
+            }
+        }
         return $this;
     }
 
@@ -146,7 +210,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+    }
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
 
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getAuthor() === $this) {
+                $post->setAuthor(null);
+            }
+        }
         return $this;
     }
 
@@ -158,18 +248,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthAt(\DateTimeInterface $birthAt): self
     {
         $this->birthAt = $birthAt;
+    }
+    /**
+     * @return Collection|Post[]
+     */
+    public function getHisPosts(): Collection
+    {
+        return $this->hisPosts;
+    }
 
+    public function addHisPost(Post $hisPost): self
+    {
+        if (!$this->hisPosts->contains($hisPost)) {
+            $this->hisPosts[] = $hisPost;
+            $hisPost->setAuthor($this);
+        }
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function removeHisPost(Post $hisPost): self
     {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
+        if ($this->hisPosts->removeElement($hisPost)) {
+            // set the owning side to null (unless already changed)
+            if ($hisPost->getAuthor() === $this) {
+                $hisPost->setAuthor(null);
+            }
+        }
 
         return $this;
     }

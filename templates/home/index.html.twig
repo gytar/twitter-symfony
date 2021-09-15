@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<div class="d-flex justify-content-center">
+		<div class="d-flex flex-column w-25">
+			<h1>Home.</h1>
+			<div class="post-form my-4">
+				{{include('post/new.html.twig')}}
+
+			</div>
+			<br>
+			<div class="thread">
+
+				{% for post in posts %}
+					<p>{{post.author.name}}</p>
+					<p>{{ post.content }}</p>
+					<p>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+				{% else %}
+					
+						<p>Aucun Tweet de trouvé 😢</p>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
