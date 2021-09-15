@@ -22,6 +22,7 @@ class HomeController extends AbstractController
         $postForm->handleRequest($request);
 
         if ($postForm->isSubmitted() && $postForm->isValid()) {
+            $post->setAuthor($this->getUser());
             $post->setCreatedAt(new \DateTime());
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($post);

@@ -31,12 +31,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $email;
 
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
-
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
@@ -69,16 +63,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="author", orphanRemoval=true)
      */
-    private $comments;
+    private $hisPosts;
 
     public function __construct()
     {
         $this->likes = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->hisPosts = new ArrayCollection();
-        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,6 +90,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -173,6 +167,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+
         return $this;
     }
 
@@ -253,33 +248,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthAt(\DateTimeInterface $birthAt): self
     {
         $this->birthAt = $birthAt;
+
         return $this;
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection|Post[]
      */
-    public function getComments(): Collection
+    public function getHisPosts(): Collection
     {
-        return $this->comments;
+        return $this->hisPosts;
     }
 
-    public function addComment(Comment $comment): self
+    public function addHisPost(Post $hisPost): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setAuthor($this);
+        if (!$this->hisPosts->contains($hisPost)) {
+            $this->hisPosts[] = $hisPost;
+            $hisPost->setAuthor($this);
         }
-
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeHisPost(Post $hisPost): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->hisPosts->removeElement($hisPost)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getAuthor() === $this) {
-                $comment->setAuthor(null);
+            if ($hisPost->getAuthor() === $this) {
+                $hisPost->setAuthor(null);
             }
         }
 
