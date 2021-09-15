@@ -5,11 +5,8 @@ security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
         App\Entity\User:
-<<<<<<< HEAD
             algorithm: bcrypt
-=======
-            algorithm: auto
->>>>>>> 934358df845dfa81b8d653fcae9cd205ffa7b198
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -17,11 +14,8 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-<<<<<<< HEAD
                 property: username
-=======
-                property: email
->>>>>>> 934358df845dfa81b8d653fcae9cd205ffa7b198
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -29,14 +23,11 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-<<<<<<< HEAD
             custom_authenticator: App\Security\UserAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
-=======
->>>>>>> 934358df845dfa81b8d653fcae9cd205ffa7b198
+                target: app_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

@@ -90,12 +90,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     public function setUsername(string $username): self
     {
-        $this->username = $username;
+         $this->username = $username;
+
+         return $this;
     }
 
     public function getEmail(): ?string
@@ -117,7 +119,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     /**
@@ -171,6 +173,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+
+        return $this;
     }
 
     /**
@@ -210,7 +214,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+        return $this;
     }
+
     /**
      * @return Collection|Post[]
      */
@@ -248,7 +254,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthAt(\DateTimeInterface $birthAt): self
     {
         $this->birthAt = $birthAt;
+
+        return $this;
     }
+
     /**
      * @return Collection|Post[]
      */
