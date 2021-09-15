@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home | Gazouillis{% endblock %}
+{% block title %}Home | Gazouillis
+{% endblock %}
 
 {% block body %}
+
+	{% set entryInfo = {} %}
+
 	<div class="d-flex justify-content-center">
 		<div class="d-flex flex-column w-60">
 			<h1>Accueil</h1>
@@ -29,7 +33,13 @@
 							<div class="col-10">
 								<div class="row">
 									<div class="col-10">
-										<p class="col-10"><span style="font-weight: bold">{{post.author.firstname}} {{post.author.lastname}} </span><span style="color: darkgrey">@{{post.author.username}}</span> . {{post.createdAt|dateToLetter}}</p>
+										<p class="col-10">
+											<span style="font-weight: bold">{{post.author.firstname}}
+												{{post.author.lastname}}
+											</span>
+											<span style="color: darkgrey">@{{post.author.username}}</span>
+											.
+											{{post.createdAt|dateToLetter}}</p>
 									</div>
 									<div class="col-2">
 										<p>...</p>
@@ -45,17 +55,21 @@
 						</div>
 						<div class="row" style="margin-top: 20px">
 							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="far fa-comment"></i><span style="margin-left: 5px">{{post.comments |length}}</span>
+								<button id="comments" style="background-color: transparent; color: white; border: none;">
+									<i class="far fa-comment"></i>
+									<span style="margin-left: 5px">{{post.comments |length}}</span>
 								</button>
 							</div>
 							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="fas fa-retweet"></i><span style="margin-left: 5px">83</span>								</button>
+								<button id="retweets" style="background-color: transparent; color: white; border: none;">
+									<i class="fas fa-retweet"></i>
+									<span style="margin-left: 5px">83</span>
+								</button>
 							</div>
 							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button style="background-color: transparent; color: white; border: none;">
-									<i class="far fa-heart"></i><span style="margin-left: 5px">{{post.likes |length}}</span>
+								<button id="likes" style="background-color: transparent; color: white; border: none;">
+									<i class="far fa-heart"></i>
+									<span style="margin-left: 5px">{{post.likes |length}}</span>
 								</button>
 							</div>
 							<div class="col-3 d-flex justify-content-center align-items-center">
@@ -65,11 +79,19 @@
 							</div>
 						</div>
 					</div>
-				{% else %}
-					
-						<p>Aucun Gazouilli de trouvé 😢</p>
-				{% endfor %}
 
+					{% set entryInfo =  entryInfo|merge(
+						{
+						id: post.id,
+						likes: post.likes,
+						comments: post.comments,
+					})  %}
+
+				{% else %}
+
+					<p>Aucun Gazouilli de trouvé 😢</p>
+				{% endfor %}
+				<div data-entry-info='{{entryInfo|json_encode|raw}}'></div>
 			</div>
 		</div>
 	</div>
