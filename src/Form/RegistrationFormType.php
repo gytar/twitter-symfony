@@ -22,15 +22,26 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username',TextType::class)
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('birthAt', DateType::class)
-            ->add('email', EmailType::class)
+            ->add('username',TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('firstname', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('lastname', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('birthAt', DateType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Password', 'attr' => ['class' => 'form-control']],
+                'second_options' => ['label' => 'Repeat Password', 'attr' => ['class' => 'form-control']],
+                
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
