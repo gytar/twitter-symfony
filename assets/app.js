@@ -12,12 +12,18 @@ import "bootstrap";
 // start the Stimulus application
 import "./bootstrap";
 
+document.addEventListener("DOMContentLoaded", () => {
+  const itemsElements = document.querySelector("[data-items]");
+  let data = JSON.parse(itemsElements.getAttribute("data-items")); 
+  let likeBtns = document.querySelectorAll(".btn-likes")
 
-document.addEventListener('DOMContentLoaded', () => {
-    const entryInfoElements = document.querySelector('[data-entry-info]');
-    console.log(entryInfoElements.dataset.entryInfo);
-    const entryInfoObjects =  Array.from(entryInfoElements).map(
-        item => JSON.parse(item.dataset.entryInfo)
-    )
-    console.log(entryInfoObjects);
-})
+  for (let i = 0; i < likeBtns.length; i++) {
+    likeBtns[i].addEventListener("click", function() {
+        alert(data[i].id);
+        
+    });
+}
+
+   
+
+});

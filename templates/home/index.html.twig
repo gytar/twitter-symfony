@@ -5,8 +5,7 @@
 
 {% block body %}
 
-	{% set entryInfo = {} %}
-
+	{% set items = [] %}
 	<div class="d-flex justify-content-center">
 		<div class="d-flex flex-column w-60">
 			<h1>Accueil</h1>
@@ -55,19 +54,19 @@
 						</div>
 						<div class="row" style="margin-top: 20px">
 							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button id="comments" style="background-color: transparent; color: white; border: none;">
+								<button class="btn-comments" style="background-color: transparent; color: white; border: none;">
 									<i class="far fa-comment"></i>
 									<span style="margin-left: 5px">{{post.comments |length}}</span>
 								</button>
 							</div>
 							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button id="retweets" style="background-color: transparent; color: white; border: none;">
+								<button class="btn-retweets" style="background-color: transparent; color: white; border: none;">
 									<i class="fas fa-retweet"></i>
 									<span style="margin-left: 5px">83</span>
 								</button>
 							</div>
 							<div class="col-3 d-flex justify-content-center align-items-center">
-								<button id="likes" style="background-color: transparent; color: white; border: none;">
+								<button class="btn-likes" style="background-color: transparent; color: white; border: none;">
 									<i class="far fa-heart"></i>
 									<span style="margin-left: 5px">{{post.likes |length}}</span>
 								</button>
@@ -80,18 +79,19 @@
 						</div>
 					</div>
 
-					{% set entryInfo =  entryInfo|merge(
+					{% set items =  items|merge([
 						{
 						id: post.id,
 						likes: post.likes,
 						comments: post.comments,
-					})  %}
+					}
+					])  %}
 
 				{% else %}
 
 					<p>Aucun Gazouilli de trouvé 😢</p>
 				{% endfor %}
-				<div data-entry-info='{{entryInfo|json_encode|raw}}'></div>
+				<div data-items='{{items|json_encode}}'></div>
 			</div>
 		</div>
 	</div>
