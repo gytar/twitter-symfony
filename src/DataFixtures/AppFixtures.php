@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
 
         $comments = Array();
 
-        for ($i = 0; $i < 20; $i++){
+        for ($i = 0; $i < 60; $i++){
             $comments[$i] = new Comment();
             $comments[$i]->setAuthor($users[random_int(0, count($users) -1)]);
             $comments[$i]->setPost($posts[random_int(0, count($posts) -1)]);

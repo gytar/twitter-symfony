@@ -7,7 +7,6 @@ use App\Entity\Post;
 use App\Form\CommentType;
 use App\Form\PostType;
 use App\Repository\PostRepository;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
