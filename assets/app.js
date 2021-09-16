@@ -19,10 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let data = JSON.parse(itemsElements.getAttribute("data-items"));
 
   let likeBtns = document.querySelectorAll(".btn-likes");
-  console.log(likeBtns[1].firstElementChild);
-
   for (let i = 0; i < likeBtns.length; i++) {
     likeBtns[i].addEventListener("click", function (e) {
+      let phpResponse = ""
       // add into database the like event
       $.ajax({
         type: "POST",
@@ -31,9 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
           id: data[i].id,
         },
         dataType: "json",
-        success: function (response) {},
+        success: function (response) {
+          phpResponse = response
+        },
       });
 
+      console.log(phpResponse);
       // change the heart color and add 1 to the length
       let icon = likeBtns[i].firstElementChild;
       icon.className = "fas fa-heart";

@@ -12,7 +12,10 @@
         {{ form_row(registrationForm.lastname) }}
         {{ form_row(registrationForm.password) }}
         {{ form_row(registrationForm.birthAt) }}
+        {{ form_row(registrationForm.picture) }}
         {{ form_row(registrationForm.agreeTerms) }}
         <button type="submit" class="btn btn-primary rounded-pill">Register</button>
     {{ form_end(registrationForm) }}
+
+    <a href="{{ path('app_login') }}">Log in</a>
 {% endblock %}
