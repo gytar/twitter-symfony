@@ -12,22 +12,34 @@ import "bootstrap";
 // start the Stimulus application
 import "./bootstrap";
 
+import $ from "jquery";
+
 document.addEventListener("DOMContentLoaded", () => {
   const itemsElements = document.querySelector("[data-items]");
-  let data = JSON.parse(itemsElements.getAttribute("data-items")); 
-  console.log('====================================');
-  console.log(data);
-  console.log('====================================');
+  let data = JSON.parse(itemsElements.getAttribute("data-items"));
 
-  let likeBtns = document.querySelectorAll(".btn-likes")
+  let likeBtns = document.querySelectorAll(".btn-likes");
+  console.log(likeBtns[1].firstElementChild);
 
   for (let i = 0; i < likeBtns.length; i++) {
-    likeBtns[i].addEventListener("click", function() {
-        alert(data[i].id);
-        
+    likeBtns[i].addEventListener("click", function (e) {
+      // add into database the like event
+      $.ajax({
+        type: "POST",
+        url: "addlike/" + data[i].id,
+        data: {
+          id: data[i].id,
+        },
+        dataType: "json",
+        success: function (response) {},
+      });
+
+      // change the heart color and add 1 to the length
+      let icon = likeBtns[i].firstElementChild;
+      icon.className = "fas fa-heart";
+      icon.ariaHidden = false;
+      likeBtns[i].classList.add("fullHeart");
+      
     });
-}
-
-   
-
+  }
 });
