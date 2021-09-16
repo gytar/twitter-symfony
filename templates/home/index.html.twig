@@ -121,8 +121,10 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row d-flex flex-column">
 					{% for post in posts %}
+						<a href="{{ path('post_show_comments', {'id': post.id}) }}" style="text-decoration: none; color: white; padding: 0">
 						<div class="tweet" style="border: 1px solid rgb(56, 68, 77); padding: 20px">
 							<div class="row">
 								<div class="col-2" style="display: flex; justify-content: end;">
@@ -180,7 +182,7 @@
 								</div>
 							</div>
 						</div>
-
+					</a>
 						{% set items = items|merge([{
 							id: post.id,
 							likes: post.likes,
