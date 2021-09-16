@@ -3,6 +3,9 @@
 {% block title %}Post{% endblock %}
 
 {% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
     {{ post.id }}
     {{ post.content }}
     {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}<br>
