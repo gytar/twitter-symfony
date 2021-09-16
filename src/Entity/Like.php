@@ -19,7 +19,7 @@ class Like
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes")
+     * Id @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes")
      */
     private $likedBy;
 

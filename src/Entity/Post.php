@@ -30,7 +30,7 @@ class Post
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="comment")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="post")
      */
     private $likes;
 

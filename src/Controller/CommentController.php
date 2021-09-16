@@ -36,11 +36,11 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setAuthor($this->getUser());
-            $comment->setPost();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
 
+            
             return $this->redirectToRoute('comment_index', [], Response::HTTP_SEE_OTHER);
         }
 

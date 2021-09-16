@@ -14,6 +14,10 @@
 		.btn-likes:hover {
 			color: #e31c7a !important;
 		}
+
+		.fullHeart {
+			color: #e31c7a !important;
+		}
 		.btn-share:hover {
 			color: #1c90de !important;
 		}
@@ -123,7 +127,7 @@
 									<div class="col-3 d-flex justify-content-center align-items-center">
 										<button class="btn-comments" style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
 											<i class="far fa-comment"></i>
-											<span style="margin-left: 5px">{{post.comments |length}}</span>
+											<span style="margin-left: 5px">{{post.comments|length}}</span>
 										</button>
 									</div>
 									<div class="col-3 d-flex justify-content-center align-items-center">
@@ -135,7 +139,7 @@
 									<div class="col-3 d-flex justify-content-center align-items-center">
 										<button class="btn-likes" style="background-color: transparent; color: rgb(136, 153, 166); border: none;">
 											<i class="far fa-heart"></i>
-											<span style="margin-left: 5px">{{post.likes |length}}</span>
+											<span style="margin-left: 5px">{{post.likes|length}}</span>
 										</button>
 									</div>
 									<div class="col-3 d-flex justify-content-center align-items-center">

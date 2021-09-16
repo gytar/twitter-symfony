@@ -34,7 +34,7 @@ class HomeController extends AbstractController
             'post' => $post,
             'postform' => $postForm->createView(),
             'posts' => $postRepo->getAllOrderByDate(),
-
+            'user' => $this->getUser(),
             'controller_name' => 'HomeController',
         ]);
     }
