@@ -3,9 +3,7 @@
 {% block title %}Post{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    {{ include('comment/new.html.twig') }}
     {{ post.id }}
     {{ post.content }}
     {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}<br>
@@ -14,7 +12,7 @@
         {{ comment.content }}
     {% endfor %}
 
-    <a href="{{ path('post_index') }}">back to list</a>
+    <a href="{{ path('home') }}">back to list</a>
 
     <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
 

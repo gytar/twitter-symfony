@@ -114,7 +114,7 @@ class PostController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('comment_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('post_show_comments', ['id'=>$id ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('post/show.html.twig', [
